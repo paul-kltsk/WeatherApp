@@ -8,7 +8,33 @@
 import Foundation
 
 extension String {
-    // in WeekTableView
+    
+    //in DayWeatherView
+    func extractHour() -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            if let date = dateFormatter.date(from: self) {
+                let calendar = Calendar.current
+                let hour = calendar.component(.hour, from: date)
+                return String(format: "%02d", hour)
+            }
+            return ""
+        }
+    
+    //in WeekTableView
+    func isNight() -> Bool {
+        let nightHours = ["00", "03"]
+        return nightHours.contains(self) ? true : false
+    }    
+    
+    
+    func findNightIndex() -> Int {
+        let hoursArr = ["00","03","06","09","12","15","18","21"]
+        let currentIndex = hoursArr.firstIndex(of: self)!
+        return 7 - Int(currentIndex) + 2
+    }
+    
+    
     func dayOfWeek() -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -40,5 +66,12 @@ extension String {
         return nil
     }
     
+    // Use in all views
+    func beforeDotWithCelsius() -> String? {
+        if let dotIndex = self.firstIndex(of: ".") {
+            return String(self[..<dotIndex]) + "°"
+        }
+        return nil
+    }
     
 }

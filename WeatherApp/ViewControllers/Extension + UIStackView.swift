@@ -10,6 +10,7 @@ import UIKit
 
 
 extension UIStackView {
+    
     //in NowWeatherView
     convenience init(arrangedSubviews: [UIView], axis: NSLayoutConstraint.Axis, spacing: CGFloat, distribution: UIStackView.Distribution) {
         self.init(arrangedSubviews: arrangedSubviews)
